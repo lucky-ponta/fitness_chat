@@ -12,4 +12,12 @@ class User < ApplicationRecord
 
   validates :name, length: { minimum: 2,maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
+
+  def followed_by?(current_user)
+    # これはcurrent_userが相手をフォローしているのかが知りたい
+    # relationship テーブルのカラムを参照する
+    #Relationship.where(follower_id: current_user.id)
+
+    return false # フォローしている場合はtrue していないならfalse
+  end
 end

@@ -25,6 +25,18 @@
 
 			<tbody>
 				<% @books.each do |book| %>
+
+
+	<!-- ここを追加 -->
+    <% if current_user != book.user %>
+        <% if book.user.followed_by?(current_user) %>
+            <p><%=link_to "フォロー済み", user_relationships_path(book.user.id), method: :delete %></p>
+        <% else %>
+            <p><%=link_to "フォローする", user_relationships_path(book.user.id), method: :post %></p>
+        <% end %>
+    <% end %>
+    <!-- ここまで -->
+
 				<tr>
 					<td>
 						<%= link_to user_path(book.user) do %>
