@@ -7,17 +7,31 @@ class User < ApplicationRecord
   has_many :books
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+  has_many :relationships
+  has_many :followings, through: :relationships, source: :follow
+  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
+  has_many :followers, through: :reverse_of_relationships, source: :user
 
   attachment :profile_image, destroy: false
 
   validates :name, length: { minimum: 2,maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
 
-  def followed_by?(current_user)
+ def follow(other_user)
+    unless self == other_user
+      self.relationships.find_or_create_by(follow_id: other_user.id)
+    end
+  end
+
+  def unfollow(other_user)
+    relationship = self.relationships.find_by(follow_id: other_user.id)
+    relationship.destroy if relationship
+  end
+
+  def following?(other_user)
+    self.followings.include?(other_user)
+  end
     # これはcurrent_userが相手をフォローしているのかが知りたい
     # relationship テーブルのカラムを参照する
     #Relationship.where(follower_id: current_user.id)
-
-    return false # フォローしている場合はtrue していないならfalse
-  end
 end

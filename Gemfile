@@ -43,6 +43,9 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano3-puma'
   gem 'capistrano-rbenv'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-doc'
 end
 
 group :development do
@@ -82,6 +85,5 @@ gem 'refile-mini_magick'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
 gem 'enum_help'
-gem 'pry-byebug'
 gem 'ransack'
 gem 'rubocop'
