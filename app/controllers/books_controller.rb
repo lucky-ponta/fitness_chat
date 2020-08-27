@@ -2,6 +2,23 @@ class BooksController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
+
+  def follow
+
+    # login users books index
+    current_user.books
+
+    # login users relationships index
+    current_user.relationships
+
+    # login users followers index
+    followers = []
+    current_user.relationships.each do |relationship|
+    　followers << relationship.follow
+    end
+
+  end
+
   def show
     @book = Book.find(params[:id])
     @book_new = Book.new

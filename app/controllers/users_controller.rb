@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     @users = User.all
     @book = Book.new
+    @relationships = current_user.relationships
 
   end
 

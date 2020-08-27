@@ -4,12 +4,11 @@
 		<%= render 'users/profile', user: current_user %>
 		<h2>新しい投稿</h2>
 		<%= render 'books/newform', book: @book %>
-		<p><%= current_user.inspect %></p>
-        <p><%= @user.inspect %></p>
+		
 		<%= render 'relationship/follow_button', user: @user %>
 	</div>
 	<div class="col-xs-9">
-		<h2>ユーザー</h2>
+		<h2>User</h2>
 
 		<!--users一覧 -->
 		<table class="table">
@@ -27,6 +26,30 @@
 					<td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
 					<td><%= user.name%></td>
 					<td><%= link_to "Show", user_path(user), class: "user_#{user.id}" %></td>
+
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+		<h2>Follow User</h2>
+
+		<!--users一覧 -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>image</th>
+					<th>name</th>
+					<th colspan="3"></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @relationships.each do |relation| %>
+				<tr>
+					<td><%= attachment_image_tag(relation.follow, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
+					<td><%= relation.follow.name%></td>
+					<td><%= link_to "Show", user_path(relation.follow), class: "user_#relation.follow.id}" %></td>
 
 				</tr>
 				<% end %>

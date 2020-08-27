@@ -1,5 +1,3 @@
-<p><%= current_user.id %></p>
-<p><%= user.id %></p>
 <% unless current_user == user %>
   <% if current_user.following?(user) %>
     <%= form_for(current_user.relationships.find_by(follow_id: user.id), url: relationship_destroy_path, html: {method: 'POST'}) do |f| %>
