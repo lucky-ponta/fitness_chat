@@ -5,13 +5,13 @@
 		<h2>プロフィール</h2>
 		<%= render 'users/profile', user: current_user %>
 
-		<h2>新しい投稿</h2>
+		<h2>New Book</h2>
 		<%= render 'books/newform', book: @book %>
 
 	</div>
 
 	<div class="col-xs-9">
-		<h2>みんなの投稿</h2>
+		<h2>Book index</h2>
 		<!--books一覧 -->
 		<table class="table table-hover table-inverse">
 			<thead>
