@@ -32,6 +32,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
        tags = Vision.get_image_data(@user.profile_image)
+       @user.tags.destroy_all
        tags.each do |tag|
         @user.tags.create(name: tag)
       end
