@@ -31,9 +31,9 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      tags = Vision.get_image_data(profile_image_id.image)
+       tags = Vision.get_image_data(@user.profile_image)
     tags.each do |tag|
-      user.tags.create(name: tag)
+      @user.tags.build(name: tag)
     end
       redirect_to user_path(@user), notice: "successfully updated user!"
     else

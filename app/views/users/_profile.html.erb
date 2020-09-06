@@ -10,6 +10,14 @@
 			<th>introduction</th>
 			<th><%= user.introduction %></th>
 		</tr>
+		<tr>
+		<th>tag</th>
+		<th>
+		<% user.tags.each do |tag| %>
+		  <%= tag.name %>
+		<% end %>
+		<th>
+		</tr>
 </table>
 
 <div class="row">
